@@ -5,8 +5,9 @@
   "description": "ximusic NodeJS React",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node src/server.js",
+    "build": "babel src -d dist",
+    "start:prod": "node dist/server.js"
   },
   "author": "XimenT",
   "license": "ISC",
@@ -29,5 +30,7 @@
     "sequelize": "6.37.8",
     "sequelize-cli": "6.6.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.29.7"
+  }
 }
