@@ -1,0 +1,44 @@
+name: XiMusic CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # lấy src từ repo
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # setup node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # như cái tên
+      - name: Install Backend dependencies
+        # làm việc tại folder đó (cd)
+        working-directory: ./xmt-Backend
+        # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
+        run: npm ci
+
+      # như cái tên
+      - name: Install Frontend dependencies
+        # làm việc tại folder đó (cd)
+        working-directory: ./xmt-Frontend
+        # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
+        run: npm ci
+
+      # như cái tên
+      - name: Build Frontend
+        working-directory: ./xmt-Frontend
+        run: npm run build
