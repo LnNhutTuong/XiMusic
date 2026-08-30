@@ -1,10 +1,7 @@
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Login from "../components/Auth/Login";
 import Register from "../components/Auth/Register";
 
@@ -28,7 +25,7 @@ import PrivateRoutes from "./AdminRoute";
 import PublicRoutes from "./PublicRoute";
 import UserRoutes from "./UserRoute";
 
-const AppRoutes = (props) => {
+const AppRoutes = () => {
   return (
     <>
       <Routes>

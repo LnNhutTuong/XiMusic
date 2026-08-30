@@ -1,8 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import  { createContext, useEffect, useState } from "react";
 import { getUserAccount } from "../services/auth/accountService";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "@/services/auth/authService";
-import { getNotifications } from "@/services/notification/notificationService";
 
 const UserContext = createContext();
 
@@ -59,7 +58,7 @@ const UserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log("fetchUser error");
+      console.log("fetchUser error: ", error);
 
       setUser({
         isLoadingAuth: false,

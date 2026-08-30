@@ -23,6 +23,16 @@ export const NotificationProvider = ({ children }) => {
   const [notificationById, setNotificationById] = useState("");
   const [unreadCount, setUnreadCount] = useState(0);
 
+   //Vào local lấy mấy thằng public noti mà user đã đọc
+  const getReadPublicIds = () => {
+    try {
+      return JSON.parse(localStorage.getItem("read_public_notis") || "[]");
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
   const fetchNotifications = useCallback(async () => {
     const res = await getNotifications(user?.account?.id);
     if (res?.EC === 0) {
@@ -43,8 +53,10 @@ export const NotificationProvider = ({ children }) => {
   }, [user?.account?.id]);
 
   useEffect(() => {
-    fetchNotifications();
-  }, [fetchNotifications]);
+    if (user?.account?.id) {
+      fetchNotifications();
+    }
+  }, [user?.account?.id, fetchNotifications]);
 
   const handleGetNotificationById = async (notiId, userId) => {
     const res = await getNotificationById(notiId, userId);
@@ -55,15 +67,7 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
-  //Vào local lấy mấy thằng public noti mà user đã đọc
-  const getReadPublicIds = () => {
-    try {
-      return JSON.parse(localStorage.getItem("read_public_notis") || "[]");
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
+ 
   //gọi cái này ra, onChange hay onClick thì chưa biết vì chưa hiểu rõ cách haotj động lắm
   const markAllPublicAsRead = () => {
     if (!notifications?.publicNotis.length) return;
@@ -78,7 +82,7 @@ export const NotificationProvider = ({ children }) => {
   };
 
   //mark user noti as read
-  const markUserNotiAsRead = (id) => {};
+  const markUserNotiAsRead = () => {};
 
   return (
     <NotificationContext.Provider

@@ -95,16 +95,16 @@ const NowPlayingSidebar = (props) => {
     });
   }, [currentSong?.id]);
 
+  const nextIndex = (currentIndex + 1) % queue.length;
+  const nextSong = queue[nextIndex];
+
   useEffect(() => {
     setDataQueue({
       queue: queue.slice(currentIndex + 1),
       currentSong,
       nextSong,
     });
-  }, [queue, currentIndex]);
-
-  const nextIndex = (currentIndex + 1) % queue.length;
-  const nextSong = queue[nextIndex];
+  }, [queue, currentIndex, currentSong, nextSong]);
 
   const handlePlaySong = (song, songs, playlist = null) => {
     playSongContext(song, songs, { type: "PlayInQue" });

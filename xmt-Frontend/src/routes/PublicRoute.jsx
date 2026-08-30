@@ -1,9 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import _ from "lodash";
-import { useState } from "react";
 import { UserContext } from "@/context/userContext";
-const PublicRoutes = (props) => {
+const PublicRoutes = () => {
   const { user } = useContext(UserContext);
 
   return !user?.isAuthenticated ? <Outlet /> : <Navigate to="/" />;

@@ -1,10 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import _ from "lodash";
-import { useState } from "react";
 import { UserContext } from "@/context/userContext";
 
-const AdminRoute = (props) => {
+const AdminRoute = () => {
   const { user } = useContext(UserContext);
 
   if (!user.isAuthenticated) {

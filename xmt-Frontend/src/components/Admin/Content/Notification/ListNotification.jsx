@@ -22,13 +22,29 @@ import { getNotificationsForAdmin } from "@/services/notification/notificationSe
 
 const ListNotification = () => {
   const [ListNotification, setListNotification] = useState("");
-  const [totalPage, setTotalPage] = useState([]);
+  const [totalPage, setTotalPage] = useState([1]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (type) => {
+    if (type === "next") {
+      setCurrentPage((prev) => Math.min(prev + 1, totalPage.length));
+      return;
+    }
+
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleChoosePageNumber = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const handleGetNotificationForAdmin = async () => {
     let res = await getNotificationsForAdmin();
 
     if (res?.EC === 0) {
-      setListNotification(res?.DT);
+      const rows = Array.isArray(res?.DT) ? res.DT : [];
+      setListNotification(rows);
+      setTotalPage(rows.length > 0 ? Array.from({ length: Math.ceil(rows.length / 10) || 1 }, (_, index) => index + 1) : [1]);
     } else {
       toast.error(res?.EM);
     }

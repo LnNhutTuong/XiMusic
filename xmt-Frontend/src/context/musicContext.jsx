@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import { buildQueue } from "@/utils/songUtils";
 import { shuffleArray } from "@/utils/songUtils";
 const PlayerContext = createContext();

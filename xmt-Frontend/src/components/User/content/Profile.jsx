@@ -51,16 +51,18 @@ export const Profile = (props) => {
   const [showDialogBecameAnArtist, setShowDialogBecameAnArtist] =
     useState(false);
 
-  useEffect(() => {
-    handleGetProfileData(user.account.email);
-  }, []);
-
   const handleGetProfileData = async (email) => {
     let res = await getProfile(email);
     if (res?.EC === 0) {
       setProfileData(res?.DT);
     }
   };
+
+  useEffect(() => {
+    if (user?.account?.email) {
+      handleGetProfileData(user.account.email);
+    }
+  }, [user?.account?.email]);
 
   const handleEdit = () => {
     setIsEdit(!isEdit);

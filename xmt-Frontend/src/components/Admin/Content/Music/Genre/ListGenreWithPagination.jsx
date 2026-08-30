@@ -22,6 +22,8 @@ import {
   getGenreWithId,
 } from "../../../../../services/admin/music/genre/genreService";
 import questionIcon from "@/assets/static/genre/question_icon.jpg";
+import { toast } from "react-toastify";
+
 const ManagerGenre = (props) => {
   const [listGenre, setListGenre] = useState([]);
   const [totalPage, setTotalPage] = useState([]);
