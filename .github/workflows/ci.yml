@@ -10,7 +10,6 @@ on:
       - master
 
 jobs:
-
   frontend-ci:
     runs-on: ubuntu-latest
     steps:
@@ -44,16 +43,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      
+
       - name: Install Backend dependencies
         working-directory: ./xmt-Backend
         run: npm ci
 
+      - name: Test Backend
+        working-directory: ./xmt-Backend
+        run: npm test
+
       - name: Build Backend
         working-directory: ./xmt-Backend
         run: npm run build
-
-
-
-
-
