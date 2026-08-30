@@ -10,7 +10,8 @@ on:
       - master
 
 jobs:
-  learn:
+
+  Frontend:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,13 +26,6 @@ jobs:
           node-version: 22
 
       # như cái tên
-      - name: Install Backend dependencies
-        # làm việc tại folder đó (cd)
-        working-directory: ./xmt-Backend
-        # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
-        run: npm ci
-
-      # như cái tên
       - name: Install Frontend dependencies
         # làm việc tại folder đó (cd)
         working-directory: ./xmt-Frontend
@@ -44,11 +38,34 @@ jobs:
         # check ở trong thằng script của quoắc king đia
         run: npm run lint
 
+      - name: Build Backend
+        working-directory: ./xmt-Backend
+        run: npm run build
+
+  Backend:
+    runs-on: ubuntu-latest
+    steps:
+      # lấy src từ repo
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # setup node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
       # như cái tên
+      - name: Install Backend dependencies
+        # làm việc tại folder đó (cd)
+        working-directory: ./xmt-Backend
+        # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
+        run: npm ci
+
+         # như cái tên
       - name: Build Frontend
         working-directory: ./xmt-Frontend
         run: npm run build
 
-      - name: Build Backend
-        working-directory: ./xmt-Backend
-        run: npm run build
+
+
