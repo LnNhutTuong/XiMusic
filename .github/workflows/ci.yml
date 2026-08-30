@@ -13,7 +13,6 @@ jobs:
 
   Frontend:
     runs-on: ubuntu-latest
-
     steps:
       # lấy src từ repo
       - name: Checkout source code
@@ -38,8 +37,9 @@ jobs:
         # check ở trong thằng script của quoắc king đia
         run: npm run lint
 
-      - name: Build Backend
-        working-directory: ./xmt-Backend
+       # như cái tên
+      - name: Build Frontend
+        working-directory: ./xmt-Frontend
         run: npm run build
 
   Backend:
@@ -62,10 +62,11 @@ jobs:
         # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
         run: npm ci
 
-         # như cái tên
-      - name: Build Frontend
-        working-directory: ./xmt-Frontend
+      - name: Build Backend
+        working-directory: ./xmt-Backend
         run: npm run build
+
+
 
 
 
