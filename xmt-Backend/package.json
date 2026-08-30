@@ -1,7 +1,6 @@
 {
   "name": "ximusic",
   "version": "1.0.0",
-  "type": "commonjs",
   "description": "ximusic NodeJS React",
   "main": "server.js",
   "scripts": {
