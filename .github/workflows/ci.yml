@@ -38,6 +38,12 @@ jobs:
         # dùng CI vì nếu đã có node thì nó xóa rồi cài lại luôn, tiện hơn ins
         run: npm ci
 
+      # Au tu tét
+      - name: Lint Frontend
+        working-directory: ./xmt-Frontend
+        # check ở trong thằng script của quoắc king đia
+        run: npm run lint
+
       # như cái tên
       - name: Build Frontend
         working-directory: ./xmt-Frontend
