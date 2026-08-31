@@ -12,10 +12,10 @@ const handleGetAllSongsPublic = async (req, res) => {
     const keySearch = req.query.keySearch || "";
 
     if (!page || !limit) {
-      return {
+      return res.status(400).json({
         EM: "Missing required parameters", //error message
         EC: 0, //error code
-      };
+      });
     }
 
     let data = await getAllSongsPublic(page, limit, genreId, keySearch);
