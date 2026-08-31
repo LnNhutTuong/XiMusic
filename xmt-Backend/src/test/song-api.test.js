@@ -7,7 +7,9 @@ test("Test API get all song public EC:200", async () => {
     limit: 10,
   });
 
-  (console.log(">>>check status: ", res.statusCode),
-    console.log(">>>check body: ", res.body));
+  console.log(">>>check status: ", res.statusCode);
+  console.log(">>>check body: ", res.body);
+  console.log(">>>check text: ", res.text);
+
   expect(res.statusCode).toBe(200);
 });
