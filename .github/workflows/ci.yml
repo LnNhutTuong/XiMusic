@@ -35,6 +35,21 @@ jobs:
 
   backend-ci:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: ximusic_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -p123456"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -48,8 +63,24 @@ jobs:
         working-directory: ./xmt-Backend
         run: npm ci
 
-      - name: Test Backend
+      - name: Run database migration
         working-directory: ./xmt-Backend
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: 123456
+          DB_NAME: ximusic_test
+        run: npx sequelize-cli db:migrate
+
+      - name: Jest Backend
+        working-directory: ./xmt-Backend
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: 123456
+          DB_NAME: ximusic_test
         run: npm test
 
       - name: Build Backend
