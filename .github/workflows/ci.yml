@@ -82,6 +82,7 @@ jobs:
           DB_USER: root
           DB_PASSWORD: 123456
           DB_NAME: ximusic_test
+          REACT_URL: http://localhost:5173
         run: npm test
 
       - name: Build Backend
