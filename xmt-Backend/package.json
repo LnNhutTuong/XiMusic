@@ -10,6 +10,11 @@
     "start:prod": "node dist/server.js",
     "test": "jest"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/test/setup.js"
+    ]
+  },
   "author": "XimenT",
   "license": "ISC",
   "dependencies": {
@@ -33,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.29.7",
-    "jest": "^30.5.0"
+    "jest": "^30.5.0",
+    "supertest": "^7.2.2"
   }
 }
