@@ -71,6 +71,7 @@ jobs:
           DB_USER: root
           DB_PASSWORD: 123456
           DB_NAME: ximusic_test
+          REACT_URL: http://localhost:5137
         run: npx sequelize-cli db:migrate
 
       - name: Jest Backend
