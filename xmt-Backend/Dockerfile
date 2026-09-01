@@ -1,7 +1,8 @@
 FROM node:22
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
-COPY /src ./src
-EXPOSE 8080
+# hợp lí hơn cha npm instal vì thằng này nó được lock theo pk.json và nên dùng cho build/CI hơn cha kia
+RUN npm ci
+# copy src vào trong /app/
+COPY . .
 CMD ["npm", "start"]
