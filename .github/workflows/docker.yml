@@ -28,7 +28,7 @@ jobs:
         working-directory: ./xmt-Backend
         run: |
           docker build \
-            -t ghcr.io/lnnhuttuong/xms-backend:latest-cd \
+            -t ghcr.io/lnnhuttuong/xms-backend:latest \
             .
 
       - name: Push Docker image
