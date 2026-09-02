@@ -3,7 +3,7 @@ name: Docker CD
 on:
   push:
     branches:
-      - *
+      - master
 
 jobs:
   docker:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v4
-      
+
       - name: login to GHCR
         uses: docker/login-action@v3
         with:
@@ -34,5 +34,3 @@ jobs:
       - name: push docker image
         run: |
           docker push ghcr.io/lnnhuttuong/xms-backend:latest
-
-      
