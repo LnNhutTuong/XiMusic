@@ -3,26 +3,26 @@ name: Docker CD
 on:
   push:
     branches:
-      - *
+      - master
 
 jobs:
   docker:
     runs-on: ubuntu-latest
 
     permissions:
-      content: read
+      contents: read
       packages: write
 
     steps:
       - name: checkout source code
         uses: actions/checkout@v4
-      
+
       - name: login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{github.actor}}
-          passowrd: ${{secrets.GITHUB_TOKEN}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: build docker image
         working-directory: ./xmt-Backend
@@ -34,5 +34,3 @@ jobs:
       - name: push docker image
         run: |
           docker push ghcr.io/lnnhuttuong/xms-backend:latest
-
-      
