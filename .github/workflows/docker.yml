@@ -3,7 +3,7 @@ name: Docker CD
 on:
   push:
     branches:
-      - learn-CI/CD
+      - master
 
 jobs:
   docker:
@@ -26,6 +26,7 @@ jobs:
 
       - name: Build Docker image
         working-directory: ./xmt-Backend
+        # dấu | là bắt thực hiện trình tự theo hàng
         run: |
           docker build \
             -t ghcr.io/lnnhuttuong/xms-backend:latest \
