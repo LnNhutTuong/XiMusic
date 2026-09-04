@@ -3,16 +3,23 @@ name: Test Self Hosted Runner
 on:
   push:
     branches:
-      - master
+      - learn-CI/CD
 
 jobs:
   test-runner:
     runs-on: self-hosted
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Test runner
         run: |
-          echo "Hello from self-hosted runner"
+          echo "===== RUNNER INFO ====="
           whoami
           hostname
+          pwd
+          node -v
+          npm -v
           docker --version
+          docker compose version
