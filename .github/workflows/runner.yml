@@ -22,7 +22,25 @@ jobs:
           chmod 600 ~/.ssh/github_actions_cd
 
           ssh -i ~/.ssh/github_actions_cd \
-            -p 2222 \
-            -o StrictHostKeyChecking=no \
-            deploy@localhost \
-            "echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USERNAME' --password-stdin && docker pull ghcr.io/lnnhuttuong/xms-backend:latest"
+          -p 2222 \
+          -o StrictHostKeyChecking=no \
+          deploy@localhost \
+          "echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USERNAME' --password-stdin &&
+          docker stop xms-backend || true &&
+          docker rm xms-backend || true &&
+          docker pull ghcr.io/lnnhuttuong/xms-backend:latest &&
+          docker run -d \
+            --name xms-backend \
+            -p 8081:8081 \
+            -e PORT=8081 \
+            -e DB_HOST=172.17.0.1 \
+            -e DB_PORT=3306 \
+            -e DB_USER=root \
+            -e DB_PASSWORD=123456 \
+            -e DB_NAME=ximusic \
+            -e JWT_SECRET=athulaso1 \
+            -e JWT_EXPIRES_IN=1d \
+            ghcr.io/lnnhuttuong/xms-backend:latest"
+
+
+
