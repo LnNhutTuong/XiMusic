@@ -3,17 +3,18 @@ name: Docker CD
 on:
   push:
     branches:
-      - master
+      - Learn_CI/CD
 
 jobs:
   docker:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     permissions:
       contents: read
       packages: write
 
     steps:
+
       - name: Checkout source code
         uses: actions/checkout@v4
 
