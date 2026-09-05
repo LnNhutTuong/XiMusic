@@ -24,6 +24,7 @@ jobs:
           ssh -i ~/.ssh/github_actions_cd \
           -p 2222 \
           -o StrictHostKeyChecking=no \
+          -o PasswordAuthentication=no \
           deploy@localhost \
           "echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USERNAME' --password-stdin &&
           docker stop xms-backend || true &&

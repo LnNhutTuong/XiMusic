@@ -28,7 +28,7 @@ initApiRoutes(app);
 
 app.use((req, res) => {
   return res.send(
-    "--------------------------Connect Successfully------------------------",
+    "--------------------------Connect Successfully FROM CD------------------------",
   );
 });
 
