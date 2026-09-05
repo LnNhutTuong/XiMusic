@@ -11,21 +11,18 @@ jobs:
 
     steps:
       - name: Deploy to fake VPS
-
         env:
-        # bieesn mooi truongwf
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+
         run: |
           mkdir -p ~/.ssh
-          # co dau $ nhin ki~ zo
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/github_actions_cd
           chmod 600 ~/.ssh/github_actions_cd
-          
-          # dong 3 cho Actions vao ma khong can hoi
-          # dong 5 thanwfg nafy sex thuwcj thi khi maf ddax SSH thanfh coong vafo trong fake vps
+
           ssh -i ~/.ssh/github_actions_cd \
             -p 2222 \
             -o StrictHostKeyChecking=no \
             deploy@localhost \
-            "docker pull ghcr.io/lnnhuttuong/xms-backend:latest"
+            "echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USERNAME' --password-stdin && docker pull ghcr.io/lnnhuttuong/xms-backend:latest"
